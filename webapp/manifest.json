@@ -1,0 +1,188 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "bkl.dk.zbkldktraveloverviewpage",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:ovp",
+            "version": "1.14.0",
+            "toolsId": "f432e2d9-8ae9-48a8-8542-2243bf7a3c7c"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZSB_BKL_DK_BOOK_ANALYTICS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZSB_BKL_DK_BOOK_ANALYTICS_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZSB_BKL_DK_BOOK_ANALYTICS_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_BKL_DK_BOOK_ANALYTICS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService/ZSB_BKL_DK_BOOK_ANALYTICS_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "ZSB_BKL_DK_M_TRAVEL_PR_Annotation": {
+                "uri": "/destinations/abap-cloud-default_abap-trial/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_BKL_DK_M_TRAVEL_PR_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZSB_BKL_DK_M_TRAVEL_PR/ZSB_BKL_DK_M_TRAVEL_PR_Annotation.xml"
+                }
+            },
+            "ZSB_BKL_DK_M_TRAVEL_PR": {
+                "uri": "/sap/opu/odata/sap/ZSB_BKL_DK_M_TRAVEL_PR",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZSB_BKL_DK_M_TRAVEL_PR_Annotation",
+                        "annotation0"
+                    ],
+                    "localUri": "localService/ZSB_BKL_DK_M_TRAVEL_PR/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation0": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation0.xml",
+                "settings": {
+                    "localUri": "annotations/annotation0.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.121.5",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ovp": {},
+                "sap.ui.rta": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "bkl.dk.zbkldktraveloverviewpage.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "ZSB_BKL_DK_M_TRAVEL_PR": {
+                "dataSource": "ZSB_BKL_DK_M_TRAVEL_PR",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        }
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainModel",
+        "globalFilterEntityType": "BookingType",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": {
+            "card000": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "mainModel",
+                "settings": {
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#FlightPriceColumn",
+                    "valueSelectionInfo": "Flight Prices",
+                    "entitySet": "Booking",
+                    "title": "Flight Price",
+                    "subTitle": "My Bookings",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#IDFlightPrice",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#DPFlightPrice",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#PVFlightPriceColumn"
+                }
+            },
+            "FlightPriceAgency": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "mainModel",
+                "settings": {
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#chart001",
+                    "entitySet": "Booking",
+                    "title": "Flight Price By Agency",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#PVFlightPriceAgency"
+                }
+            }
+        },
+        "chartSettings": {}
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    }
+}
